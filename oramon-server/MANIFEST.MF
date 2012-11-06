@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: com.voyager.Main
+Class-Path: oramon.properties activation.jar mail.jar midpapi.zip ojdbc14.jar wma20.jar
