@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/578/trunk/jbox2d-testbed
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/558/trunk/jbox2d-testbed/.classpath
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/526/trunk/jbox2d-testbed/LICENSE
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/531/trunk/jbox2d-testbed/.project
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/553/trunk/jbox2d-testbed/pom.xml
+END
+conv.sh
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/469/trunk/jbox2d-testbed/conv.sh
+END

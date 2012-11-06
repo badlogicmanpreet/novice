@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/557/trunk/jbox2d-serialization/src/main/java/org/jbox2d/serialization
+END
+JbSerializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/525/trunk/jbox2d-serialization/src/main/java/org/jbox2d/serialization/JbSerializer.java
+END
+SerializationResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/525/trunk/jbox2d-serialization/src/main/java/org/jbox2d/serialization/SerializationResult.java
+END
+SerializationHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/525/trunk/jbox2d-serialization/src/main/java/org/jbox2d/serialization/SerializationHelper.java
+END
+JbDeserializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/525/trunk/jbox2d-serialization/src/main/java/org/jbox2d/serialization/JbDeserializer.java
+END
+UnsupportedObjectException.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/525/trunk/jbox2d-serialization/src/main/java/org/jbox2d/serialization/UnsupportedObjectException.java
+END
+UnsupportedListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/525/trunk/jbox2d-serialization/src/main/java/org/jbox2d/serialization/UnsupportedListener.java
+END

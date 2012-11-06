@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.badlogic.androidgames" android:versionCode="1"
+	android:versionName="1.0">
+	<uses-sdk android:minSdkVersion="3" />
+
+	<application android:icon="@drawable/icon" android:label="@string/app_name">
+		<activity android:name=".AndroidBasicsStarter" android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity android:label="Life Cycle Test" android:name=".LifeCycleTest"
+			android:configChanges="keyboard|keyboardHidden|orientation" />
+		<activity android:label="Single Touch Test" android:name=".SingleTouchTest"
+			android:configChanges="keyboard|keyboardHidden|orientation" />
+		<activity android:label="Multi Touch Test" android:name=".MultiTouchTest"
+			android:configChanges="keyboard|keyboardHidden|orientation" />
+		<activity android:label="Key Test" android:name=".KeyTest" />
+		<activity android:label="Accelerometer Test" android:name=".AccelerometerTest" />
+		<activity android:label="Assets Test" android:name=".AssetsTest" />
+		<activity android:label="RenderView Test" android:name=".RenderViewTest" />
+		<activity android:label="Shape Test" android:name=".ShapeTest" />
+        <activity android:label="Bitmap Test" android:name=".BitmapTest" />
+        <activity android:label="SurfaceView Test" android:name=".SurfaceViewTest" />
+	</application>
+
+</manifest>

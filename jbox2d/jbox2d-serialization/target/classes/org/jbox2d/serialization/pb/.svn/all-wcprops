@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/557/trunk/jbox2d-serialization/src/main/java/org/jbox2d/serialization/pb
+END
+PbDeserializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/557/trunk/jbox2d-serialization/src/main/java/org/jbox2d/serialization/pb/PbDeserializer.java
+END
+PbSerializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/557/trunk/jbox2d-serialization/src/main/java/org/jbox2d/serialization/pb/PbSerializer.java
+END
