@@ -39,5 +39,6 @@ public class WordCountDriver {
         job.setReducerClass(WordCountReducer.class);
 
         System.out.println(job.waitForCompletion(true));
+        System.out.println("Complete");
     }
 }
