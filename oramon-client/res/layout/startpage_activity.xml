@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical" >
+    <LinearLayout android:id="@+id/linearLayout1" android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent">
+        <ImageView android:layout_height="wrap_content" android:id="@+id/imageView1" android:src="@drawable/android_0" android:layout_width="wrap_content" android:onClick="OnClick" android:paddingLeft="25dip" android:paddingTop="30dip"></ImageView>
+    </LinearLayout>
+    <FrameLayout android:id="@+id/frameLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:onClick="OnClick">
+        <TextView android:id="@+id/textView1" android:layout_height="wrap_content" android:textSize="16px" android:text="Oramon Reporting System" android:layout_width="fill_parent" android:gravity="center_horizontal" android:onClick="OnClick" android:textStyle="normal|bold" android:textColor="#8AFB17"></TextView>
+    </FrameLayout>
+</LinearLayout>
