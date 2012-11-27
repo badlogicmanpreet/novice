@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Push</string>
+    <string name="main_no_items">No messages</string>
+    <string name="accounts_no_accounts">No accounts</string>
+    <string name="label_account_selector">Select account</string>
+    <string name="menu_accounts">Select account</string>
+</resources>
+
