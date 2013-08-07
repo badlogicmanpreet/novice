@@ -23,6 +23,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,10 +49,13 @@ public class PromotionActivity extends MapActivity implements LocationListener {
 
 	Set<GeoPoint> set;
 	String provider;
-	
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.savedInstanceState = savedInstanceState;
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
+		StrictMode.setThreadPolicy(policy);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.promotions_map_view);
 
@@ -92,46 +96,48 @@ public class PromotionActivity extends MapActivity implements LocationListener {
 		// // first overlay
 		// drawable = getResources().getDrawable(R.drawable.marker);
 		// itemizedOverlay = new MyItemizedOverlay(drawable, mapView);
-		//		
+		//
 		// GeoPoint point = new
 		// GeoPoint((int)(51.5174723*1E6),(int)(-0.0899537*1E6));
 		// OverlayItem overlayItem = new OverlayItem(point,
 		// "Tomorrow Never Dies (1997)",
 		// "(M gives Bond his mission in Daimler car)");
 		// itemizedOverlay.addOverlay(overlayItem);
-		//		
+		//
 		// GeoPoint point2 = new
 		// GeoPoint((int)(51.515259*1E6),(int)(-0.086623*1E6));
 		// OverlayItem overlayItem2 = new OverlayItem(point2,
 		// "GoldenEye (1995)",
 		// "(Interiors Russian defence ministry council chambers in St Petersburg)");
 		// itemizedOverlay.addOverlay(overlayItem2);
-		//		
+		//
 		// mapOverlays.add(itemizedOverlay);
 
 		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-		
+
 		provider = getBestProvider();
 
-		//Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		// Location location =
+		// locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		Location location = locationManager.getLastKnownLocation(provider);
 		if (location != null) {
 			this.onLocationChanged(location);
 		}
 	}
-	
-	public String getBestProvider(){
+
+	public String getBestProvider() {
 		Criteria myCriteria = new Criteria();
 		myCriteria.setAccuracy(Criteria.NO_REQUIREMENT);
 		myCriteria.setPowerRequirement(Criteria.POWER_LOW);
 		// let Android select the right location provider for you
-		String myProvider = locationManager.getBestProvider(myCriteria, true); 
+		String myProvider = locationManager.getBestProvider(myCriteria, true);
 		return myProvider;
 	}
 
 	protected void onResume() {
 		super.onResume();
-		//locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, this);
+		// locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+		// 1000, 1, this);
 		locationManager.requestLocationUpdates(provider, 1000, 1, this);
 	}
 
@@ -146,10 +152,12 @@ public class PromotionActivity extends MapActivity implements LocationListener {
 		double latitude = location.getLatitude();
 		double longitude = location.getLongitude();
 
-//		double latitude = 13.761760;
-//		double longitude = 100.638889;
+		// double latitude = 13.761760;
+		// double longitude = 100.638889;
 
-		
+		Log.d(TAG, "Man - " + latitude);
+		Log.d(TAG, "Man - " + longitude);
+
 		set = new HashSet<GeoPoint>();
 
 		setProgressBarIndeterminateVisibility(true);
@@ -158,47 +166,91 @@ public class PromotionActivity extends MapActivity implements LocationListener {
 		drawable = getResources().getDrawable(R.drawable.me_3);
 		itemizedOverlay = new MyItemizedOverlay(drawable, mapView);
 
-		GeoPoint whereamiPoint = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
-		OverlayItem overlayItem = new OverlayItem(whereamiPoint, "This is my location...", "(click on nearby markers to watch promotions...)");
+		GeoPoint whereamiPoint = new GeoPoint((int) (latitude * 1E6),
+				(int) (longitude * 1E6));
+		OverlayItem overlayItem = new OverlayItem(whereamiPoint,
+				"This is my location...",
+				"(click on nearby markers to watch promotions...)");
 		itemizedOverlay.addOverlay(overlayItem);
 		mapOverlays.add(itemizedOverlay);
 
+		Log.d(TAG, "Man - checkpint 1 pass");
+
 		String xml;
 		try {
-			xml = new PromotionRequest().performSearch(latitude, longitude);
-			SAXParserFactory spf = SAXParserFactory.newInstance();
-			SAXParser sp = spf.newSAXParser();
-			XMLReader xr = sp.getXMLReader();
+			/*
+			 * xml = new PromotionRequest().performSearch(latitude, longitude);
+			 * SAXParserFactory spf = SAXParserFactory.newInstance(); SAXParser
+			 * sp = spf.newSAXParser(); XMLReader xr = sp.getXMLReader();
+			 * 
+			 * XMLHandler myXMLHandler = new XMLHandler();
+			 * xr.setContentHandler(myXMLHandler); InputSource inStream = new
+			 * InputSource();
+			 * 
+			 * inStream.setCharacterStream(new StringReader(xml));
+			 * 
+			 * xr.parse(inStream);
+			 * 
+			 * ArrayList<XMLMaster> xmlMasterList =
+			 * myXMLHandler.getXMLMasterList(); for (int i = 0; i <
+			 * xmlMasterList.size(); i++) { XMLMaster xmlMaster =
+			 * xmlMasterList.get(i); Log.d(TAG,
+			 * Double.toString(xmlMaster.getLAT())); Log.d(TAG,
+			 * Double.toString(xmlMaster.getLNG()));
+			 * 
+			 * // generic overlay Drawable drawableGeneric = null;
+			 * MyItemizedOverlay itemizedOverlayGeneric = null; GeoPoint
+			 * whereamiPointGeneric = null; OverlayItem overlayItemGeneric =
+			 * null;
+			 * 
+			 * drawableGeneric =
+			 * getResources().getDrawable(R.drawable.marker_3);
+			 * itemizedOverlayGeneric = new MyItemizedOverlay(drawableGeneric,
+			 * mapView);
+			 * 
+			 * whereamiPointGeneric = new GeoPoint((int) (xmlMaster.getLAT() *
+			 * 1E6), (int) (xmlMaster.getLNG() * 1E6)); overlayItemGeneric = new
+			 * OverlayItem(whereamiPointGeneric, "This is my location...",
+			 * "(click on nearby markers to watch promotions...)");
+			 * itemizedOverlayGeneric.addOverlay(overlayItemGeneric);
+			 * mapOverlays.add(itemizedOverlayGeneric);
+			 * set.add(whereamiPointGeneric); }
+			 */
+//			double lat = 17.427222;
+//			double lng = 78.331637;
+			int count = 0;
 
-			XMLHandler myXMLHandler = new XMLHandler();
-			xr.setContentHandler(myXMLHandler);
-			InputSource inStream = new InputSource();
-
-			inStream.setCharacterStream(new StringReader(xml));
-
-			xr.parse(inStream);
-
-			ArrayList<XMLMaster> xmlMasterList = myXMLHandler.getXMLMasterList();
-			for (int i = 0; i < xmlMasterList.size(); i++) {
-				XMLMaster xmlMaster = xmlMasterList.get(i);
-				Log.d(TAG, Double.toString(xmlMaster.getLAT()));
-				Log.d(TAG, Double.toString(xmlMaster.getLNG()));
-
+			Log.d(TAG, "Man - checkpint 2 pass");
+			for (int i = 0; i < 5; i++) {
+				count = count + 1;
 				// generic overlay
 				Drawable drawableGeneric = null;
 				MyItemizedOverlay itemizedOverlayGeneric = null;
 				GeoPoint whereamiPointGeneric = null;
 				OverlayItem overlayItemGeneric = null;
 
-				drawableGeneric = getResources().getDrawable(R.drawable.marker_3);
-				itemizedOverlayGeneric = new MyItemizedOverlay(drawableGeneric, mapView);
+				drawableGeneric = getResources().getDrawable(
+						R.drawable.marker_3);
+				itemizedOverlayGeneric = new MyItemizedOverlay(drawableGeneric,
+						mapView);
 
-				whereamiPointGeneric = new GeoPoint((int) (xmlMaster.getLAT() * 1E6), (int) (xmlMaster.getLNG() * 1E6));
-				overlayItemGeneric = new OverlayItem(whereamiPointGeneric, "This is my location...",
+				Log.d(TAG, "Man - checkpint 3 pass");
+				whereamiPointGeneric = new GeoPoint((int) (latitude * 1E6),
+						(int) (longitude * 1E6));
+				overlayItemGeneric = new OverlayItem(whereamiPointGeneric,
+						"This is my location...",
 						"(click on nearby markers to watch promotions...)");
 				itemizedOverlayGeneric.addOverlay(overlayItemGeneric);
 				mapOverlays.add(itemizedOverlayGeneric);
 				set.add(whereamiPointGeneric);
+				if (count == 1 || count == 4) {
+					latitude = latitude + 0.000179;
+					longitude = longitude + 0.00209;
+				} else {
+					latitude = latitude + 0.001380;
+					longitude = longitude + 0.000490;
+				}
+				Log.d(TAG, "Man - checkpint 4 pass");
 			}
 
 		} catch (Exception e) {
@@ -216,8 +268,8 @@ public class PromotionActivity extends MapActivity implements LocationListener {
 		// root.child("result").child("geometry").child("location").child("lng");
 		// Log.d(TAG, "Manpreet = " + lat.content());
 		// Log.d(TAG, "Manpreet = " + lng.content());
-		//			
-		//            
+		//
+		//
 		// } catch (Exception e) {
 		// e.printStackTrace();
 		// }
@@ -228,6 +280,7 @@ public class PromotionActivity extends MapActivity implements LocationListener {
 			// mc.animateTo(whereamiPoint);
 			// mc.setZoom(20);
 
+			Log.d(TAG, "Man - checkpint 5 pass");
 			// testing the zoom controls
 			final MapController mc = mapView.getController();
 			mc.setCenter(whereamiPoint);
@@ -238,20 +291,25 @@ public class PromotionActivity extends MapActivity implements LocationListener {
 
 			Iterator it = set.iterator();
 			while (it.hasNext()) {
+				Log.d(TAG, "Man - checkpint 6 pass");
 				// Get element
 				GeoPoint element = (GeoPoint) it.next();
 
 				int lat = element.getLatitudeE6();
 				int lon = element.getLongitudeE6();
 
+				Log.d(TAG, "Man - checkpint 7 pass " + lat + "---" + lon);
 				maxLatitude = Math.max(lat, maxLatitude);
 				minLatitude = Math.min(lat, minLatitude);
 				maxLongitude = Math.max(lon, maxLongitude);
 				minLongitude = Math.min(lon, minLongitude);
+				Log.d(TAG, "Man - checkpint 8 pass");
 			}
 
-			mc.animateTo(new GeoPoint((maxLatitude + minLatitude) / 2, (maxLongitude + minLongitude) / 2));
-			mc.zoomToSpan(Math.abs(maxLatitude - minLatitude), Math.abs(maxLongitude - minLongitude));
+			mc.animateTo(new GeoPoint((maxLatitude + minLatitude) / 2,
+					(maxLongitude + minLongitude) / 2));
+			mc.zoomToSpan(Math.abs(maxLatitude - minLatitude),
+					Math.abs(maxLongitude - minLongitude));
 
 		} else {
 
@@ -263,6 +321,7 @@ public class PromotionActivity extends MapActivity implements LocationListener {
 			}
 		}
 
+		Log.d(TAG, "Man - checkpint 9 pass");
 		setProgressBarIndeterminateVisibility(false);
 	}
 
@@ -325,8 +384,11 @@ public class PromotionActivity extends MapActivity implements LocationListener {
 		drawable = getResources().getDrawable(R.drawable.androidmarker);
 		itemizedOverlay = new MyItemizedOverlay(drawable, mapView);
 
-		GeoPoint whereamiPoint = new GeoPoint((int) (13.764792 * 1E6), (int) (100.644486 * 1E6));
-		OverlayItem overlayItem = new OverlayItem(whereamiPoint, "This is my location...", "(click on nearby markers to watch promotions...)");
+		GeoPoint whereamiPoint = new GeoPoint((int) (13.764792 * 1E6),
+				(int) (100.644486 * 1E6));
+		OverlayItem overlayItem = new OverlayItem(whereamiPoint,
+				"This is my location...",
+				"(click on nearby markers to watch promotions...)");
 		itemizedOverlay.addOverlay(overlayItem);
 		mapOverlays.add(itemizedOverlay);
 
@@ -345,7 +407,8 @@ public class PromotionActivity extends MapActivity implements LocationListener {
 
 			xr.parse(inStream);
 
-			ArrayList<XMLMaster> xmlMasterList = myXMLHandler.getXMLMasterList();
+			ArrayList<XMLMaster> xmlMasterList = myXMLHandler
+					.getXMLMasterList();
 			for (int i = 0; i < xmlMasterList.size(); i++) {
 				XMLMaster xmlMaster = xmlMasterList.get(i);
 				Log.d(TAG, Double.toString(xmlMaster.getLAT()));
@@ -358,10 +421,14 @@ public class PromotionActivity extends MapActivity implements LocationListener {
 				OverlayItem overlayItemGeneric = null;
 
 				drawableGeneric = getResources().getDrawable(R.drawable.marker);
-				itemizedOverlayGeneric = new MyItemizedOverlay(drawableGeneric, mapView);
+				itemizedOverlayGeneric = new MyItemizedOverlay(drawableGeneric,
+						mapView);
 
-				whereamiPointGeneric = new GeoPoint((int) (xmlMaster.getLAT() * 1E6), (int) (xmlMaster.getLNG() * 1E6));
-				overlayItemGeneric = new OverlayItem(whereamiPointGeneric, "This is my location...",
+				whereamiPointGeneric = new GeoPoint(
+						(int) (xmlMaster.getLAT() * 1E6),
+						(int) (xmlMaster.getLNG() * 1E6));
+				overlayItemGeneric = new OverlayItem(whereamiPointGeneric,
+						"This is my location...",
 						"(click on nearby markers to watch promotions...)");
 				itemizedOverlayGeneric.addOverlay(overlayItemGeneric);
 				mapOverlays.add(itemizedOverlayGeneric);

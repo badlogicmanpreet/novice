@@ -6,6 +6,6 @@
 	<com.google.android.maps.MapView
 		android:id="@+id/promomapview" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" android:clickable="true"
-		android:apiKey="0YBZI3g2ZOYCvt3xK9OaPKrKx-BProvYr1zHrHg" />
+		android:apiKey="0YBZI3g2ZOYBrpzTZt3XZ7lUp_bLFXlfzKcAFtw" />
 
 </RelativeLayout>

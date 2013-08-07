@@ -3,34 +3,124 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/power"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
-        android:text="Powered@MS Ghotra" />
+        android:layout_marginLeft="4dp"
+        android:src="@drawable/junglee1" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="60dp"
+        android:background="@android:color/darker_gray" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/shopping_cart" />
 
     <EditText
         android:id="@+id/search_editText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="60dp"
+        android:drawableRight="@drawable/search_ic"
         android:ems="10"
-        android:hint="Store Name" android:layout_marginTop="200dp">
+        android:hint="Search Junglee.com"
+        android:imeOptions="actionSearch"
+        android:inputType="text" >
 
         <requestFocus />
     </EditText>
 
+    
+    <!-- Newly added -->
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignParentBottom="true"
+        android:text="Mobiles" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView4"
+        android:layout_alignParentBottom="true"
+        android:text="Books" />
+
     <ImageView
-        android:id="@+id/search_imageView1"
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_marginRight="14dp"
+        android:src="@drawable/top_story4" />
+
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_editText1"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/search"/>
+        android:text="Browse Top Categories"
+        android:textColor="#787878"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="17dp"
+        android:src="@drawable/top_story1" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView1"
+        android:src="@drawable/top_story3" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_toLeftOf="@+id/textView1"
+        android:text="Tablets" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="18dp"
+        android:src="@drawable/top_story2" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignRight="@+id/TextView02"
+        android:text="Laptops" />
 
 </RelativeLayout>

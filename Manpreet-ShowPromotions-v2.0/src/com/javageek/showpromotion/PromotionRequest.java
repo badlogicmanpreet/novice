@@ -41,7 +41,7 @@ public class PromotionRequest {
 			reqUrl.put("sensor", "false");
 			reqUrl.put("language", "en");
 			//reqUrl.put("types", "store|shopping_mall");
-			reqUrl.put("name", "Tesco");
+			reqUrl.put("name", "Orbit");
 
 			HttpRequestFactory httpRequestFactory = createRequestFactory(transport);
 			HttpRequest request = httpRequestFactory.buildGetRequest(reqUrl);
